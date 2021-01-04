@@ -53,5 +53,29 @@ var boardEvents = function () {
     }
   };
 
-  const clearTheBoard = function (DOMboard) {};
+
+  const clearTheBoard = function (DOMboard) {
+    /*  First reduce the boxRow from 3x3 matrix to 3x1 array of booleans.
+     Row containing 0 will return false.
+     If there is no 0 on the Matrix => [true,true,true]
+    \![true,true,true].includes(false) === true;
+    */
+    let boardFull = !board
+      .map((boardRow) => !boardRow.includes(0))
+      .includes(false);
+    if (boardFull) {
+      alert("it's a draw, GO AGANE!");
+      // Using setTimeout to delay wiping out the board
+      setTimeout(() => {
+        var board = [
+          [0, 0, 0],
+          [0, 0, 0],
+          [0, 0, 0],
+        ];
+        for (let i = 0; i < DOMboard.length; ++i) {
+          DOMboard[i].innerText = "";
+        }
+      }, 0);
+    }
+  };
 };
