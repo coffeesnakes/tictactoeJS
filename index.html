@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <title>Tic-Tac-Toe</title>
+  <style>
+    body {
+      font-family: 'Lato', sans-serif;
+      align-items: center;
+      background-color: wheat;
+    }
+
+    table,
+    td {
+      border: 1px solid #1DA1F2;
+      margin: auto;
+    }
+
+    td {
+      height: 90px;
+      width: 100px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 25px;
+    }
+
+    thead,
+    tfoot {
+      background-color: #333;
+      color: #fff;
+    }
+  </style>
+  <script src="app.js"></script>
+</head>
+
+<body onload="boardEvents()">
+  <table>
+    <thead>
+      <tr>
+        <th colspan="3" class='turnDetect'>Player One's Turn</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class='board' row=0 col=0></td>
+        <td class='board' row=0 col=1></td>
+        <td class='board' row=0 col=2></td>
+
+      </tr>
+      <tr>
+        <td class='board' row=1 col=0></td>
+        <td class='board' row=1 col=1></td>
+        <td class='board' row=1 col=2></td>
+      </tr>
+      <tr>
+        <td class='board' row=2 col=0></td>
+        <td class='board' row=2 col=1></td>
+        <td class='board' row=2 col=2></td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3">
+          <div>x : 0</div>
+          <div class="scoreBoard">o : 0</div>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+
+</body>
+</head>
+
+</html>
