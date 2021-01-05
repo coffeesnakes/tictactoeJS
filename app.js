@@ -27,6 +27,31 @@ var boardEvents = function () {
     });
   }
   // helpers
+
+  // rotates 90 degrees (think tetris).
+  const transpose = function (matrix) {
+    var newMatrix = [
+      [0, 0, 0],
+      [0, 0, 0],
+      [0, 0, 0],
+    ];
+    for (let i = 0; i < newMatrix.length; i++) {
+      for (let j = 0; j < newMatrix[i].length; j++) {
+        newMatrix[i][j] = matrix[j][i];
+      }
+    }
+    return newMatrix;
+  };
+
+  // checks diagonals both minor and major.
+  const diagonal = function (matrix) {
+    var newMatrix = [];
+    newMatrix.push([matrix[0][0], matrix[1][1], matrix[2][2]]);
+    newMatrix.push([matrix[2][0], matrix[1][1], matrix[0][2]]);
+    return newMatrix;
+  };
+
+
   let turn = function () {
     if (this.innerHTML === "") {
       p1Turn = !p1Turn;
@@ -53,7 +78,6 @@ var boardEvents = function () {
     }
   };
 
-
   const clearTheBoard = function (DOMboard) {
     /*  First reduce the boxRow from 3x3 matrix to 3x1 array of booleans.
      Row containing 0 will return false.
@@ -78,4 +102,50 @@ var boardEvents = function () {
       }, 0);
     }
   };
+   const victory = function (DOMboard) {
+     const rowReduce = (acc, curVal) => {
+       if (acc === curVal && acc !== 0) {
+         return acc;
+       } else {
+         return false;
+       }
+     };
+
+     const boardReduce = (acc, curVal) => {
+       return acc || curVal;
+     };
+     //  check 8 by 3 matrix for victory (columns, rows, maj&min diagonals)
+     let eightbythree = [...board, ...transpose(board), ...diagonal(board)];
+     let victor = eightbythree
+       .map((boardRow) => boardRow.reduce(rowReduce))
+       .reduce(boardReduce);
+
+     if (victor === 1) {
+       ++battlesWon.X;
+       alert("X gon give it to ya!");
+       board = [
+         [0, 0, 0],
+         [0, 0, 0],
+         [0, 0, 0],
+       ];
+       for (let i = 0; i < DOMboard.length; ++i) {
+         DOMboard[i].innerText = "";
+       }
+     } else if (victor === 2) {
+       ++battlesWon.O;
+       alert("O no, O won!");
+       board = [
+         [0, 0, 0],
+         [0, 0, 0],
+         [0, 0, 0],
+       ];
+       for (let i = 0; i < DOMboard.length; ++i) {
+         DOMboard[i].innerText = "";
+       }
+     }
+     document.getElementsByClassName(
+       "scoreBoard"
+     )[0].innerHTML = `${battlesWon.X} : ${battlesWon.O}`;
+   };
+
 };
